@@ -1,0 +1,12 @@
+GET http://localhost:3000/users
+
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiemlvbWVxIiwiaWF0IjoxNjEwOTk3NzQxfQ.5aIXGdCyLIdPHSr7Wh10oGCc4rFEmMvDMbfhDE6rxig
+
+###
+
+POST http://localhost:3000/api/info
+Content-Type: application/json
+
+{
+    "username": "ziomeq"
+}

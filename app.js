@@ -4,12 +4,43 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-const port = 3000;
+
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var usersRouter = require('./routes/authToken');
 
 var app = express();
+
+
+require('dotenv').config()
+const jwt = require('jsonwebtoken');
+
+app.use(express.json());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//authenticate user
+app.post('/api/info', (req, res) => {
+    const username = req.body.username
+    const user = {name: username}
+  
+    const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
+    res.json({accessToken: accessToken})
+  })
+  
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
