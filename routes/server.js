@@ -1,5 +1,7 @@
 var express = require('express');
-var app = express();
+
+//Importing app module, thus getting instance of an app
+var app = require('../app');
 const port = 3000;
   
 

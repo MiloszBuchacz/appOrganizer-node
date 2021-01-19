@@ -11,12 +11,6 @@ var usersRouter = require('./routes/authToken');
 
 var app = express();
 
-
-
-
-
-
-require('dotenv').config()
 const jwt = require('jsonwebtoken');
 
 app.use(express.json());
@@ -31,14 +25,9 @@ app.post('/api/info', (req, res) => {
     res.json({accessToken: accessToken})
   })
   
-
-
-
-  // require('dotenv').config()
-  // const jwt = require('jsonwebtoken')
-  // app.use(express.json())
+  require('dotenv').config()
   
-  
+
   const usersData = [
     {
     username: "ziomal",
@@ -72,11 +61,6 @@ app.post('/api/info', (req, res) => {
   
   }
 
-
-
-
-
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -105,6 +89,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
 
 module.exports = app;
