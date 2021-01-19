@@ -12,22 +12,14 @@ var usersRouter = require('./routes/authToken');
 var app = express();
 
 
+
+
+
+
 require('dotenv').config()
 const jwt = require('jsonwebtoken');
 
 app.use(express.json());
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //authenticate user
@@ -39,6 +31,49 @@ app.post('/api/info', (req, res) => {
     res.json({accessToken: accessToken})
   })
   
+
+
+
+  // require('dotenv').config()
+  // const jwt = require('jsonwebtoken')
+  // app.use(express.json())
+  
+  
+  const usersData = [
+    {
+    username: "ziomal",
+    title: "kuropatwa"
+    },
+    {
+        username: "przedstawiciel handlowy",
+        title: "dostojny ptak"
+    }   
+  ]
+  
+  
+  
+  /* GET users listing. */
+  app.get('/api/info', authenticateToken, (req, res) => {
+    res.json(posts.filter(post => post.username === req.user.name))
+  })
+  
+  
+  function authenticateToken(req,res,next){
+  
+    const authHeader = req.headers['authorization']
+    const token  = authHeader && authHeader.split(' ')[1]
+    if (token == null) return res.sendStatus(401)
+  
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+      if (err) return res.sendStatus(403)
+      req.user = user
+      next()
+    })
+  
+  }
+
+
+
 
 
 
