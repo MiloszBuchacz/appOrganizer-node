@@ -53,7 +53,7 @@ app.post('/api/info', (req, res) => {
   
   
   /* GET users listing. */
-  app.get('/api/info', authenticateToken, (req, res) => {
+  app.get('/users', authenticateToken, (req, res) => {
     res.json(posts.filter(post => post.username === req.user.name))
   })
   
