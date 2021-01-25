@@ -53,4 +53,4 @@ router.post('/api/post', (req, res) => {
     }   
   ]
 
-module.exports = router;
+module.exports = {router, authenticateToken};
