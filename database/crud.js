@@ -1,4 +1,5 @@
-const mongose = require('mongoose')
+const mongose = require('mongoose');
+const { remove } = require('./models/user');
 const User = require('./models/user')
 
 
@@ -23,4 +24,14 @@ const findUsers = async () => {
     }
 }
 
-module.exports = {addUser, findUsers}
+const deleteUser = async (id) =>{
+    try{
+        const user = await User.deleteOne({_id: id});
+        console.log(user);
+        return user 
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+module.exports = {addUser, findUsers, deleteUser}
