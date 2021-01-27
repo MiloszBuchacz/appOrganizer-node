@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
  var auth = require('./authUser');
-var crud = require('../database/crud');
+var crud = require('../database/services/crud');
 
 // const authenticateToken = require('./authUser')
 

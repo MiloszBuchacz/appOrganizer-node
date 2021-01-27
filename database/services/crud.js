@@ -1,6 +1,6 @@
 const mongose = require('mongoose');
-const { remove } = require('./models/user');
-const User = require('./models/user')
+const { remove } = require('../models/user');
+const User = require('../models/user')
 
 
 const addUser = async (data) =>{
