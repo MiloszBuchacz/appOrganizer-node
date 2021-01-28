@@ -23,6 +23,18 @@ router.delete('/users/:id', async (req, res) =>{
     res.json(user);
 })
 
+router.put('/users/:id', async (req, res) =>{
+    const object = {
+        name: req.body.name,
+        password: req.body.password,
+        age: req.body.age
+    };
+    const id = req.params.id;
+    const user = await crud.updateUser(id, object)
+    console.log(user);
+    res.json(user);
+})
+
 router.get('/users', async function(req, res, next){
     res.json(await crud.findUsers());
 })

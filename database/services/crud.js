@@ -34,4 +34,14 @@ const deleteUser = async (id) =>{
     }
 }
 
-module.exports = {addUser, findUsers, deleteUser}
+const updateUser = async (id, update) =>{
+    try{
+        const user = await User.updateOne({_id: id}, update);
+        console.log(user);
+        return user
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+module.exports = {addUser, findUsers, deleteUser, updateUser}
