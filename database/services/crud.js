@@ -24,6 +24,26 @@ const findUsers = async () => {
     }
 }
 
+const findUser = async (id) => {
+    try {
+        const users = await User.findOne({_id: id});
+        console.log(users);
+        return users;
+    } catch (error){
+        console.log(error);
+    }
+}
+
+const findUserByName = async (name) => {
+    try {
+        const users = await User.findOne({ name: name });
+        console.log(users);
+        return users;
+    } catch (error){
+        console.log(error);
+    }
+}
+
 const deleteUser = async (id) =>{
     try{
         const user = await User.deleteOne({_id: id});
@@ -44,4 +64,4 @@ const updateUser = async (id, update) =>{
     }
 }
 
-module.exports = {addUser, findUsers, deleteUser, updateUser}
+module.exports = {addUser, findUsers, findUser, deleteUser, updateUser, findUserByName}

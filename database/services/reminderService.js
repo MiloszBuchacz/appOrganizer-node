@@ -24,6 +24,16 @@ const findReminders = async () => {
     }
 }
 
+const findReminder = async (id) => {
+    try {
+        const reminders = await Reminder.findOne({_id: id});
+        console.log(reminders);
+        return reminders;
+    } catch (error){
+        console.log(error);
+    }
+}
+
 const deleteReminder = async (id) =>{
     try{
         const reminder = await Reminder.deleteOne({_id: id});
@@ -34,4 +44,14 @@ const deleteReminder = async (id) =>{
     }
 }
 
-module.exports = {addReminder, findReminders, deleteReminder}
+const updateReminder = async (id, update) =>{
+    try{
+        const reminder = await Reminder.updateOne({_id: id}, update);
+        console.log(reminder);
+        return reminder
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+module.exports = {addReminder, findReminders, findReminder, deleteReminder, updateReminder}
