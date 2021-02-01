@@ -6,6 +6,7 @@ var app = express()
 app.use(express.json());
 
 const jwt = require('jsonwebtoken');
+const crud = require('../database/services/crud');
 require('dotenv').config()
 
 
@@ -18,8 +19,6 @@ router.post('/api/post', (req, res) => {
     const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN)
     res.json({accessToken: accessToken, refreshToken: refreshToken})
   })
-
-
 
   router.get('/api/auth/test', authenticateToken, async (req, res) => {
     console.log(req.user);
@@ -54,6 +53,15 @@ router.post('/api/post', (req, res) => {
       next()
     })
   }
+
+  router.post('/api/auth/signin', async (req, res) =>{
+    const user = await crud.findUserByName(req.body.username);
+    if (user && user.password === req.body.password){
+      const {name, _id} = user;
+      const token = generateAccessToken({name, id: _id});
+      res.json({accessToken: token});
+    }
+  }) 
 
   const usersData = [
     {
