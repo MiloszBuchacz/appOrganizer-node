@@ -8,6 +8,7 @@ app.use(express.json());
 
 const jwt = require('jsonwebtoken');
 const crud = require('../database/services/crud');
+const { route } = require('./users');
 require('dotenv').config()
 
 
@@ -56,25 +57,38 @@ router.post('/api/post', (req, res) => {
   }
 
   //bcrypting password
-  router.post('/dupa', async (req, res) => {
+  router.post('/api/auth/signup', async (req, res) => {
     try{
       const salt = await bcrypt.genSalt();
       const hashedPassword = await bcrypt.hash(req.body.password, salt);
-      const user = {password: hashedPassword};
+      const user = await crud.addUser({name: req.body.username, password: hashedPassword});
       res.json(user)
-    console.log(user);
     } catch {
       res.status(500).send()
     }
   })
 
+  //user login
   router.post('/api/auth/signin', async (req, res) =>{
     const user = await crud.findUserByName(req.body.username);
-    if (user && user.password === req.body.password){
-      const {name, _id} = user;
-      const token = generateAccessToken({name, id: _id});
+    const compare = await bcrypt.compare(req.body.password, user.password);
+    console.log(compare);
+    if(compare){
+      const token = generateAccessToken({username: user.name, id: user._id });
+      await crud.updateUser(user._id,{token: token});
       res.json({accessToken: token});
+
+    } else {
+      res.status(401).send();
     }
+
+
+
+    // if (user && user.password === req.body.password){
+    //   const {name, _id} = user;
+    //   const token = generateAccessToken({name, id: _id});
+    //   res.json({accessToken: token});
+    // }
   }) 
 
   const usersData = [
