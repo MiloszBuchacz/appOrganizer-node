@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var bcrypt = require('bcrypt');
 var usersService = require('../database/services/crud');
 
 var app = express()
@@ -53,6 +54,19 @@ router.post('/api/post', (req, res) => {
       next()
     })
   }
+
+  //bcrypting password
+  router.post('/dupa', async (req, res) => {
+    try{
+      const salt = await bcrypt.genSalt();
+      const hashedPassword = await bcrypt.hash(req.body.password, salt);
+      const user = {password: hashedPassword};
+      res.json(user)
+    console.log(user);
+    } catch {
+      res.status(500).send()
+    }
+  })
 
   router.post('/api/auth/signin', async (req, res) =>{
     const user = await crud.findUserByName(req.body.username);
