@@ -72,34 +72,14 @@ router.post('/api/post', (req, res) => {
   router.post('/api/auth/signin', async (req, res) =>{
     const user = await crud.findUserByName(req.body.username);
     const compare = await bcrypt.compare(req.body.password, user.password);
-    console.log(compare);
     if(compare){
       const token = generateAccessToken({username: user.name, id: user._id });
       await crud.updateUser(user._id,{token: token});
       res.json({accessToken: token});
-
     } else {
       res.status(401).send();
     }
-
-
-
-    // if (user && user.password === req.body.password){
-    //   const {name, _id} = user;
-    //   const token = generateAccessToken({name, id: _id});
-    //   res.json({accessToken: token});
-    // }
   }) 
 
-  const usersData = [
-    {
-    username: "ziomal",
-    title: "kuropatwa"
-    },
-    {
-        username: "przedstawiciel handlowy",
-        title: "dostojny ptak"
-    }   
-  ]
-
+  
 module.exports = {router, authenticateToken};

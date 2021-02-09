@@ -15,7 +15,10 @@ const Reminder = mongoose.model('Reminder',{
     },
     active: {
         type: Boolean
-    }
+    },
+    userId: { 
+        type: String
+    } 
 })
 
 module.exports = Reminder;

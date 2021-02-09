@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/', usersRouter.router);
 app.use('/', testRouter);
-app.use('/', reminderRoutes);
+app.use('/api', reminderRoutes);
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {

@@ -54,4 +54,14 @@ const updateReminder = async (id, update) =>{
     }
 }
 
-module.exports = {addReminder, findReminders, findReminder, deleteReminder, updateReminder}
+const findUserReminders = async(userId) =>  {
+    try{
+        const reminder = await Reminder.find({_userId: userId})
+        console.log(reminder);
+        return reminder
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+module.exports = {addReminder, findReminders, findReminder, deleteReminder, updateReminder, findUserReminders}

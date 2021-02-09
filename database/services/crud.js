@@ -64,4 +64,6 @@ const updateUser = async (id, update) =>{
     }
 }
 
+
+
 module.exports = {addUser, findUsers, findUser, deleteUser, updateUser, findUserByName}
