@@ -37,7 +37,7 @@ router.get('/user/:id', async function(req, res, next){
 })
 //find user reminders
 router.get('/userReminder/:id', async function(req, res, next){
-    res.json(await reminders.findUserReminders(req.params.userId));
+    res.json(await reminders.findUserReminders(req.params.id));
 })
 
 module.exports = router;

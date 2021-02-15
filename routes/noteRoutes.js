@@ -36,7 +36,7 @@ router.get('/note/:id', async function(req, res, next){
 })
 //find user notes
 router.get('/userNote/:id', async function(req, res, next){
-    res.json(await crud.findUserNotes(req.params.userId));
+    res.json(await crud.findUserNotes(req.params.id));
 })
 
 

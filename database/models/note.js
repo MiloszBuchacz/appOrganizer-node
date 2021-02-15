@@ -7,7 +7,7 @@ const note = mongoose.model('note',{
     body: {
         type: String
     },
-    userId: {
+    _userId: {
         type: String
     }
 })

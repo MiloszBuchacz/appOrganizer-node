@@ -64,9 +64,9 @@ const updateNote = async (id, update) =>{
     }
 }
 
-const findUserNotes = async(userId) =>  {
+const findUserNotes = async(paramId) =>  {
     try{
-        const reminder = await note.find({_userId: userId})
+        const reminder = await note.find({userId: paramId})
         console.log(reminder);
         return reminder
     } catch (error) {
