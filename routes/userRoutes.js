@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var auth = require('./authUser');
-var crud = require('../database/services/crud');
+var crud = require('../database/services/userService');
 var reminders = require('../database/services/reminderService');
 
 // const authenticateToken = require('./authUser')
@@ -39,7 +39,5 @@ router.get('/user/:id', async function(req, res, next){
 router.get('/userReminder/:id', async function(req, res, next){
     res.json(await reminders.findUserReminders(req.params.userId));
 })
-
-
 
 module.exports = router;

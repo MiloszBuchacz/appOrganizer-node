@@ -1,14 +1,13 @@
 var express = require('express');
 var router = express.Router();
 var bcrypt = require('bcrypt');
-var usersService = require('../database/services/crud');
 
 var app = express()
 app.use(express.json());
 
 const jwt = require('jsonwebtoken');
-const crud = require('../database/services/crud');
-const { route } = require('./users');
+const crud = require('../database/services/userService');
+const { route } = require('./userRoutes');
 require('dotenv').config()
 
 
