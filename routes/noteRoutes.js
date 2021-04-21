@@ -2,10 +2,11 @@ var express = require('express');
 var router = express.Router();
 var auth = require('./authUser');
 var crud = require('../database/services/noteService');
+const service = require("./authUser");
 
 // const authenticateToken = require('./authUser')
 
-//add note 
+//add note
 router.post('/notes', async (req, res) => {
     console.log(req.body);
     const user = await crud.addNote(req.body);
@@ -27,8 +28,9 @@ router.put('/notes/:id', async (req, res) =>{
     res.json(user);
 })
 //find all notes
-router.get('/notes', async function(req, res, next){
-    res.json(await crud.findNotes({}));
+router.get('/notes', service.authenticateToken, async function(req, res, next){
+    const { id } = req.user;
+    res.json(await crud.findNotes({_userId: id}));
 })
 //find note by id
 router.get('/note/:id', async function(req, res, next){
