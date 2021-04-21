@@ -74,7 +74,10 @@ router.post('/api/post', (req, res) => {
     if(compare){
       const token = generateAccessToken({username: user.name, id: user._id });
       await crud.updateUser(user._id,{token: token});
-      res.json({accessToken: token});
+      res.json({
+        accessToken: token,
+        id: user._id
+      });
     } else {
       res.status(401).send();
     }
