@@ -1,4 +1,5 @@
 var createError = require('http-errors');
+var cors = require('cors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -11,8 +12,11 @@ var usersRouter = require('./routes/authUser');
 var reminderRoutes = require('./routes/reminderRoutes');
 var noteRoutes = require('./routes/noteRoutes');
 var userRoutes = require('./routes/userRoutes');
+var cors = require('cors');
 
 var app = express()
+
+app.use(cors())
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
