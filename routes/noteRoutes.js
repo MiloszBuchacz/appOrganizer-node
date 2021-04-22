@@ -7,9 +7,10 @@ const service = require("./authUser");
 // const authenticateToken = require('./authUser')
 
 //add note
-router.post('/notes', async (req, res) => {
-    console.log(req.body);
-    const user = await crud.addNote(req.body);
+router.post('/notes', service.authenticateToken, async (req, res) => {
+    const { id } = req.user;
+    console.log(req.body, id);
+    const user = await crud.addNote({name: req.body.name, body: req.body.body, _userId: id});
     console.log(user);
   res.json(user);
 });
@@ -33,11 +34,13 @@ router.get('/notes', service.authenticateToken, async function(req, res, next){
     res.json(await crud.findNotes({_userId: id}));
 })
 //find note by id
-router.get('/note/:id', async function(req, res, next){
+router.get('/note/:id', service.authenticateToken, async function(req, res, next){
+    const { id } = req.user;
     res.json(await crud.findNote(req.params.id));
 })
 //find user notes
 router.get('/userNote/:id', async function(req, res, next){
+    const { id } = req.user;
     res.json(await crud.findUserNotes(req.params.id));
 })
 
